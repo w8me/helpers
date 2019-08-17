@@ -5,4 +5,6 @@
   	maven { url 'https://jitpack.io' }
 	<span class="pl-en">}</span> 
 }
-implementation 'com.github.w8me:helpers:2e3a516e7a'
+dependencies {
+         implementation 'com.github.w8me:helpers:1.0'
+}
