@@ -30,7 +30,7 @@ public class FileHelper {
         }
     }
 
-    public String getBase64FromUri(Uri uri, Context context) {
+    public static String getBase64FromUri(Uri uri, Context context) {
         try {
             final InputStream inputStream = context.getContentResolver().openInputStream(uri);
             Bitmap bm = BitmapFactory.decodeStream(inputStream);
