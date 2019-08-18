@@ -36,6 +36,7 @@ public class BaseDialogFragment extends AndroidxDialogFragment implements BaseVi
         if (dialog != null && dialog.getWindow() != null) {
             int width = ViewGroup.LayoutParams.MATCH_PARENT;
             int height = ViewGroup.LayoutParams.MATCH_PARENT;
+            dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
             dialog.getWindow().setLayout(width, height);
         }
     }
