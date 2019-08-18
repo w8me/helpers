@@ -23,7 +23,7 @@ public class Verifier {
     );
 
     public static boolean checksEmail(EditText email, int idError) {
-        Drawable icon = ContextCompat.getDrawable(email.getContext(), idError);
+        Drawable icon = ContextCompat.getDrawable(email.getContext(), R.drawable.error);
         icon.setBounds(new Rect(0, 0, Objects.requireNonNull(icon).getIntrinsicWidth(), icon.getIntrinsicHeight()));
         if (EMAIL.matcher(email.getText().toString().trim()).matches()) {
             email.setError(null, null);
@@ -36,7 +36,7 @@ public class Verifier {
     }
 
     public static boolean checksPasswordLength(EditText password, int length, int idError) {
-        Drawable icon = ContextCompat.getDrawable(password.getContext(), idError);
+        Drawable icon = ContextCompat.getDrawable(password.getContext(), R.drawable.error);
         icon.setBounds(new Rect(0, 0, Objects.requireNonNull(icon).getIntrinsicWidth(), icon.getIntrinsicHeight()));
         if (password.getText().toString().length() >= length) {
             password.setError(null, null);
@@ -49,7 +49,7 @@ public class Verifier {
     }
 
     public static boolean checksPasswordsMatch(EditText passwordOne, EditText passwordTwo, int idError) {
-        Drawable icon = ContextCompat.getDrawable(passwordTwo.getContext(), idError);
+        Drawable icon = ContextCompat.getDrawable(passwordTwo.getContext(), R.drawable.error);
         icon.setBounds(new Rect(0, 0, Objects.requireNonNull(icon).getIntrinsicWidth(), icon.getIntrinsicHeight()));
         if (passwordOne.getText().toString().equals(passwordTwo.getText().toString())) {
             passwordTwo.setError(null, null);
