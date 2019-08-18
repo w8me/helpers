@@ -6,5 +6,5 @@
 	<span class="pl-en">}</span> 
 }
 dependencies {
-	implementation 'com.github.w8me:helpers:0193083267'
+	implementation 'com.github.w8me:helpers:71dd28c038'
 }
