@@ -42,4 +42,13 @@ public class FileHelper {
             return "";
         }
     }
+
+    public static Bitmap getBitmapFromUri(Uri uri, Context context) {
+        try {
+            final InputStream inputStream = context.getContentResolver().openInputStream(uri);
+            return BitmapFactory.decodeStream(inputStream);
+        } catch (FileNotFoundException e) {
+            return null;
+        }
+    }
 }
