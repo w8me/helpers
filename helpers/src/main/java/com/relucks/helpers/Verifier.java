@@ -3,61 +3,56 @@ package com.relucks.helpers;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 
 import java.util.Objects;
 import java.util.regex.Pattern;
 
-
 public class Verifier {
 
-    private static final Pattern EMAIL = Pattern.compile(
-            "[a-zA-Z0-9+._%-+]{1,256}" +
-                    "@" +
-                    "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
-                    "(" +
-                    "\\." +
-                    "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
-                    ")+"
-    );
+    private static final Pattern EMAIL = Pattern.compile("[a-zA-Z0-9+._%-+]{1,256}@[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}(\\.[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25})+");
 
-    public static boolean checksEmail(EditText email, int idError) {
-        Drawable icon = ContextCompat.getDrawable(email.getContext(), R.drawable.error);
-        icon.setBounds(new Rect(0, 0, Objects.requireNonNull(icon).getIntrinsicWidth(), icon.getIntrinsicHeight()));
+    public static boolean checksEmail(TextView email, int idError) {
         if (EMAIL.matcher(email.getText().toString().trim()).matches()) {
             email.setError(null, null);
             return true;
         } else {
-            email.requestFocus();
-            email.setError(email.getResources().getString(idError), icon);
+            showError(email, idError);
             return false;
         }
     }
 
-    public static boolean checksPasswordLength(EditText password, int length, int idError) {
-        Drawable icon = ContextCompat.getDrawable(password.getContext(), R.drawable.error);
-        icon.setBounds(new Rect(0, 0, Objects.requireNonNull(icon).getIntrinsicWidth(), icon.getIntrinsicHeight()));
+    public static boolean checksPasswordLength(TextView password, int length, int idError) {
         if (password.getText().toString().length() >= length) {
             password.setError(null, null);
             return true;
         } else {
-            password.requestFocus();
-            password.setError(password.getResources().getString(idError), icon);
+            showError(password, idError);
             return false;
         }
     }
 
-    public static boolean checksPasswordsMatch(EditText passwordOne, EditText passwordTwo, int idError) {
-        Drawable icon = ContextCompat.getDrawable(passwordTwo.getContext(), R.drawable.error);
-        icon.setBounds(new Rect(0, 0, Objects.requireNonNull(icon).getIntrinsicWidth(), icon.getIntrinsicHeight()));
+    public static boolean checksPasswordsMatch(TextView passwordOne, EditText passwordTwo, int idError) {
         if (passwordOne.getText().toString().equals(passwordTwo.getText().toString())) {
             passwordTwo.setError(null, null);
             return true;
         } else {
             passwordTwo.requestFocus();
-            passwordTwo.setError(passwordTwo.getResources().getString(idError), icon);
+            showError(passwordTwo, idError);
             return false;
         }
+    }
+
+    public static void showError(TextView view, int idError) {
+        showError(view, view.getContext().getString(idError));
+    }
+
+    public static void showError(TextView view, String error) {
+        Drawable icon = ContextCompat.getDrawable(view.getContext(), R.drawable.error);
+        icon.setBounds(new Rect(0, 0, Objects.requireNonNull(icon).getIntrinsicWidth(), icon.getIntrinsicHeight()));
+        view.requestFocus();
+        view.setError(error, icon);
     }
 }
