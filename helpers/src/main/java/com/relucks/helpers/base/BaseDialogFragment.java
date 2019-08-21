@@ -22,11 +22,18 @@ public class BaseDialogFragment extends AndroidxDialogFragment implements BaseVi
 
     @Override
     public void showProgress(boolean status) {
-        if (getActivity() != null)
-            if (status)
-                mProgressDialog.show(getActivity().getSupportFragmentManager(), "progress");
-            else
-                mProgressDialog.dismiss();
+        if (getActivity() != null) {
+            if (mProgressDialog == null)
+                mProgressDialog = new ProgressDialog();
+            try {
+                if (status)
+                    mProgressDialog.show(getActivity().getSupportFragmentManager(), "progress" + System.currentTimeMillis());
+                else
+                    mProgressDialog.dismiss();
+            } catch (Exception ignored) {
+
+            }
+        }
     }
 
     @Override

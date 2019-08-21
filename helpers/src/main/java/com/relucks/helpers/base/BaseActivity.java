@@ -20,10 +20,16 @@ public abstract class BaseActivity extends AndroidxActivity implements BaseView 
 
     @Override
     public void showProgress(boolean status) {
-        if (status)
-            mProgressDialog.show(getSupportFragmentManager(), "progress");
-        else
-            mProgressDialog.dismiss();
+        if (mProgressDialog == null)
+            mProgressDialog = new ProgressDialog();
+        try {
+            if (status)
+                mProgressDialog.show(getSupportFragmentManager(), "progress" + System.currentTimeMillis());
+            else
+                mProgressDialog.dismiss();
+        }catch (Exception ignored){
+
+        }
     }
 
     @Override
