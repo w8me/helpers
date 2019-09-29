@@ -8,7 +8,10 @@ import android.util.Base64;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class FileHelper {
     public static byte[] getByteFromUri(Uri uri, Context context) {
@@ -48,6 +51,20 @@ public class FileHelper {
             final InputStream inputStream = context.getContentResolver().openInputStream(uri);
             return BitmapFactory.decodeStream(inputStream);
         } catch (FileNotFoundException e) {
+            return null;
+        }
+    }
+
+    public static Bitmap getBitmapFromURL(String strURL) {
+        try {
+            URL url = new URL(strURL);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            return BitmapFactory.decodeStream(input);
+        } catch (IOException e) {
+            e.printStackTrace();
             return null;
         }
     }
