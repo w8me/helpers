@@ -21,7 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 
 @Module
-public class ApiModule<T> {
+public abstract class ApiModule<T> {
     private Class<T> mApiClassType;
     private String mBaseUrl;
 
