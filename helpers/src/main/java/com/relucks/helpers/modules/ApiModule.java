@@ -23,16 +23,18 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Module
 public class ApiModule<T> {
     private Class<T> mApiClassType;
+    private String mBaseUrl;
 
     public ApiModule(Class<T> apiClassType, String baseUrl) {
         mApiClassType = apiClassType;
+        mBaseUrl = baseUrl;
     }
 
     @Provides
     @Singleton
     T provideApi(Retrofit.Builder builder, OkHttpClient client) {
         return builder
-                .baseUrl("baseUrl")
+                .baseUrl(mBaseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(client)
