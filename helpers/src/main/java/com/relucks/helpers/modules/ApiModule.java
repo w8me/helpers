@@ -25,7 +25,7 @@ public class ApiModule<T> {
     private Class<T> mApiClassType;
     private String mBaseUrl;
 
-    public ApiModule(Class<T> apiClassType, String baseUrl) {
+    public ApiModule(Class<T> apiClassType,  String baseUrl) {
         mApiClassType = apiClassType;
         mBaseUrl = baseUrl;
     }
